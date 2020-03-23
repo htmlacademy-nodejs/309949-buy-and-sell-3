@@ -1,0 +1,28 @@
+extends ../layout/layout.pug
+
+block content
+  if categories.length
+    section.categories-list
+      h1.visually-hidden Сервис объявлений "Куплю - продам"
+      include ../common/categories-list
+    section.tickets-list
+      h2.visually-hidden Самые новые предложения
+      .tickets-list__wrapper
+        .tickets-list__header
+          p.tickets-list__title Самое свежее
+        ul
+          each val in offersRecent
+            include ../common/offers-item
+    section.tickets-list
+      h2.visually-hidden Самые обсуждаемые предложения
+      .tickets-list__wrapper
+        .tickets-list__header
+          p.tickets-list__title Самые обсуждаемые
+        ul
+          each val in offersPopular
+            include ../common/offers-item
+  else
+    .message
+      .message__text
+        p На сайте еще не опубликовано ни&nbsp;одного объявления.
+      a(href=`${isLoggedIn ? "/offers/add" : "/register"}` class="message__link btn btn--big") Вход и регистрация

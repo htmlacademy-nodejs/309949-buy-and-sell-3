@@ -1,0 +1,8 @@
+ul.categories-list__wrapper
+  each val in categories
+    li.categories-list__item
+      a(href="#" class="category-tile category-tile--default")
+        span.category-tile__image
+          img(src= val.image srcset= `${val.retina} 2x` alt="Иконка категории")
+        span.category-tile__label= `${val.title} `
+          span.category-tile__qty.js-qty= val.count

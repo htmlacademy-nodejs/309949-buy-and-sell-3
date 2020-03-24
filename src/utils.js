@@ -23,7 +23,7 @@ module.exports.mapOffers = (offers, categories) => {
       image: `/img/item${offerNumber}.jpg`,
       retina: `/img/item${offerNumber}@2x.jpg`,
       categories: offer.categories.map((cat) => {
-        return categories.find((category) => category.id === cat).title;
+        return categories.find((category) => category.id === cat);
       })
     };
   });

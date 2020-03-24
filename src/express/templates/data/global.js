@@ -13,3 +13,5 @@ module.exports.globalData = {
 };
 
 module.exports.currentUser = {id: 1};
+
+module.exports.isError = false;

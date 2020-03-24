@@ -1,18 +1,39 @@
 'use strict';
 const {globalData} = require(`../templates/data/global`);
 const {categories} = require(`../templates/data/categories`);
-const {offersRecent, offersPopular} = require(`../templates/data/offers`);
+const {offers} = require(`../templates/data/offers`);
+const {mapOffers} = require(`../../utils`);
 
 const {Router} = require(`express`);
 const router = Router;
 const homeRouter = router();
+
+const offersRecent = mapOffers(offers
+  .slice()
+  .sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+    return dateB - dateA;
+  })
+  .slice(0, 8), categories);
+
+const offersPopular = mapOffers(offers
+  .slice()
+  .filter((offer) => offer.comments.length !== 0)
+  .sort((a, b) => {
+    const commentsLengthA = (a.comments || []).length;
+    const commentsLengthB = (b.comments || []).length;
+    return commentsLengthB - commentsLengthA;
+  })
+  .slice(0, 8), categories);
 
 homeRouter.get(`/`, (req, res) => {
   res.render(`main`, {
     ...globalData,
     categories,
     offersRecent,
-    offersPopular
+    offersPopular,
+    path: req.path
   });
 });
 

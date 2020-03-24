@@ -1,0 +1,9 @@
+li.js-card
+  .comment-card
+    .comment-card__header
+      a(href=`#` class=`comment-card__avatar avatar`)
+        img(src=`${comment.author.avatar}` srcset=`${comment.author.retinaAvatar} 2x` alt=`Аватар пользователя`)
+      p.comment-card__author= comment.author.name
+    .comment-card__content
+      p= comment.text
+    button(class=`comment-card__delete js-delete` type=`button`) Удалить

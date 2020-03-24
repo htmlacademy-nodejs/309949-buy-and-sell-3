@@ -4,9 +4,9 @@ li(class=`tickets-list__item ${(path && path === `/my`) ? `js-card` : ``}`)
       img(src= val.image srcset= `${val.retina} 2x` alt=`Изображение товара`)
     .ticket-card__info
       span.ticket-card__label= `${val.type === `buy` ? `Куплю` : val.type === `sell` ? `Продам` : `Не знаю` }`
-      .ticket-card__categories
-        each category in val.categories
-          a(href=`#`)= category
+      //.ticket-card__categories
+      //  each category in val.categories
+      //    a(href=`#`)= category
       .ticket-card__header
         h3.ticket-card__title
           a(href=`#`)= val.title

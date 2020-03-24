@@ -1,0 +1,11 @@
+extends ../layout/layout.pug
+
+block content
+  section.comments
+    .comments__wrapper
+      if offersWithComments.every(offer => offer.comments.length <= 0)
+        .comments__message У ваших публикаций еще нет комментариев.
+      else
+        h1.visually-hidden Страница комментариев
+        each offer in offersWithComments
+          include ../common/comments-offer

@@ -1,0 +1,28 @@
+extends ../layout/layout.pug
+
+block content
+  section.categories-list
+    h1.visually-hidden Сервис объявлений "Куплю - продам"
+    include ../common/categories-list
+  section.tickets-list
+    if category
+      h2.visually-hidden= `Предложения из категории ${category.title}`
+      .tickets-list__wrapper
+        .tickets-list__header
+          p.tickets-list__title= `${category.title} `
+            b.js-qty= category.count
+        if category.offers
+          ul
+            each val in category.offers
+              include ../common/offers-item
+          .tickets-list__pagination
+            ul.pagination
+              each val in [1, 2, 3, 4, 5]
+                li
+                  a(class=`${val === 1 ? `active` : ``}` href=`#`)= val
+              li
+                a(href=`#`) дальше
+        else
+          p Предложения в данной категории не найдены
+    else
+      p Категория не найдена

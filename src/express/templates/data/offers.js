@@ -1,27 +1,19 @@
 'use strict';
 
-module.exports.offersRecent = [
-  {color: `01`, image: `img/item01.jpg`, retina: `img/item01@2x.jpg`, type: `buy`, categories: [`Дом`], title: `Монстера`, price: `1000`, description: `Куплю монстеру зеленую в хорошем зеленом состоянии, буду поливать...`},
-  {color: `02`, image: `img/item02.jpg`, retina: `img/item02@2x.jpg`, type: `sell`, categories: [`Дом`], title: `Мое старое кресло`, price: `4000`, description: `Продам свое старое кресло, чтобы сидеть и читать книги зимними...`},
-  {color: `03`, image: `img/item03.jpg`, retina: `img/item03@2x.jpg`, type: `sell`, categories: [`ЭЛЕКТРОНИКА`, `Дом`], title: `Дедушкины часы`, price: `45 000`, description: `Продаю дедушкины часы в прекрасном состоянии, ходят до...`},
-  {color: `04`, image: `img/item04.jpg`, retina: `img/item04@2x.jpg`, type: `buy`, categories: [`Дом`], title: `Кофеварка`, price: `2000`, description: `Куплю вот такую итальянскую кофеварку, можно любой фирмы...`},
-  {color: `05`, image: `img/item05.jpg`, retina: `img/item05@2x.jpg`, type: `sell`, categories: [`Авто`, `ЭЛЕКТРОНИКА`], title: `Ленд Ровер`, price: `900 000`, description: `Куплю монстеру зеленую в хорошем зеленом состоянии, буду поливать...`},
-  {color: `06`, image: `img/item06.jpg`, retina: `img/item06@2x.jpg`, type: `sell`, categories: [`ЭЛЕКТРОНИКА`], title: `Ableton`, price: `88 000`, description: `Продам свое старое кресло, чтобы сидеть и читать книги зимними...`},
-  {color: `07`, image: `img/item07.jpg`, retina: `img/item07@2x.jpg`, type: `sell`, categories: [`Спорт и отдых`], title: `Доска`, price: `55 000`, description: `Продаю дедушкины часы в прекрасном состоянии, ходят до...`},
-  {color: `08`, image: `img/item08.jpg`, retina: `img/item08@2x.jpg`, type: `buy`, categories: [`ЭЛЕКТРОНИКА`], title: `Фотик Canon`, price: `32 000`, description: `Куплю вот такую итальянскую кофеварку, можно любой фирмы...`},
-];
-
-module.exports.offersPopular = [
-  {color: `09`, image: `img/item09.jpg`, retina: `img/item09@2x.jpg`, type: `buy`, categories: [`Дом`], title: `Монстера`, price: `1000`, description: `Куплю монстеру зеленую в хорошем зеленом состоянии, буду поливать...`},
-  {color: `10`, image: `img/item10.jpg`, retina: `img/item10@2x.jpg`, type: `sell`, categories: [`Дом`], title: `Мое старое кресло`, price: `4000`, description: `Продам свое старое кресло, чтобы сидеть и читать книги зимними...`},
-  {color: `11`, image: `img/item11.jpg`, retina: `img/item11@2x.jpg`, type: `sell`, categories: [`ЭЛЕКТРОНИКА`], title: `Дедушкины часы`, price: `45 000`, description: `Продаю дедушкины часы в прекрасном состоянии, ходят до...`},
-  {color: `04`, image: `img/item04.jpg`, retina: `img/item04@2x.jpg`, type: `buy`, categories: [`Дом`], title: `Кофеварка`, price: `2000`, description: `Куплю вот такую итальянскую кофеварку, можно любой фирмы...`},
-];
-
-module.exports.myOffers = [
-  {color: `06`, image: `img/item06.jpg`, retina: `img/item06@2x.jpg`, type: `sell`, categories: [`ЭЛЕКТРОНИКА`], title: `Ableton`, price: `88 000`, description: `Продам свое старое кресло, чтобы сидеть и читать книги зимними...`},
-  {color: `10`, image: `img/item10.jpg`, retina: `img/item10@2x.jpg`, type: `sell`, categories: [`Дом`], title: `Мое старое кресло`, price: `4000`, description: `Продам свое старое кресло, чтобы сидеть и читать книги зимними...`},
-  {color: `04`, image: `img/item04.jpg`, retina: `img/item04@2x.jpg`, type: `buy`, categories: [`Дом`], title: `Кофеварка`, price: `2000`, description: `Куплю вот такую итальянскую кофеварку, можно любой фирмы...`},
-  {color: `08`, image: `img/item08.jpg`, retina: `img/item08@2x.jpg`, type: `buy`, categories: [`ЭЛЕКТРОНИКА`], title: `Фотик Canon`, price: `32 000`, description: `Куплю вот такую итальянскую кофеварку, можно любой фирмы...`},
-  {color: `01`, image: `img/item01.jpg`, retina: `img/item01@2x.jpg`, type: `buy`, categories: [`Дом`], title: `Монстера`, price: `1000`, description: `Куплю монстеру зеленую в хорошем зеленом состоянии, буду поливать...`},
+module.exports.offers = [
+  {id: 1, authorId: 1, type: `buy`, categories: [1], comments: [1, 2, 3], createdAt: `2020-03-24`, title: `Монстера`, price: `1000`, description: `Куплю монстеру зеленую в хорошем зеленом состоянии, буду поливать...`},
+  {id: 2, authorId: 2, type: `sell`, categories: [1], comments: [1, 2], createdAt: `2020-03-23`, title: `Мое старое кресло`, price: `4000`, description: `Продам свое старое кресло, чтобы сидеть и читать книги зимними...`},
+  {id: 3, authorId: 2, type: `sell`, categories: [2, 1], comments: [1], createdAt: `2020-03-22`, title: `Дедушкины часы`, price: `45 000`, description: `Продаю дедушкины часы в прекрасном состоянии, ходят до...`},
+  {id: 4, authorId: 1, type: `buy`, categories: [1], comments: [1], createdAt: `2020-03-21`, title: `Кофеварка`, price: `2000`, description: `Куплю вот такую итальянскую кофеварку, можно любой фирмы...`},
+  {id: 5, authorId: 3, type: `sell`, categories: [5, 2], comments: [], createdAt: `2020-03-20`, title: `Ленд Ровер`, price: `900 000`, description: `Куплю монстеру зеленую в хорошем зеленом состоянии, буду поливать...`},
+  {id: 6, authorId: 1, type: `sell`, categories: [2], comments: [], createdAt: `2020-03-19`, title: `Ableton`, price: `88 000`, description: `Продам свое старое кресло, чтобы сидеть и читать книги зимними...`},
+  {id: 7, authorId: 3, type: `sell`, categories: [4], comments: [], createdAt: `2020-03-18`, title: `Доска`, price: `55 000`, description: `Продаю дедушкины часы в прекрасном состоянии, ходят до...`},
+  {id: 8, authorId: 1, type: `buy`, categories: [2], comments: [], createdAt: `2020-03-17`, title: `Фотик Canon`, price: `32 000`, description: `Куплю вот такую итальянскую кофеварку, можно любой фирмы...`},
+  {id: 9, authorId: 4, type: `buy`, categories: [1], comments: [], createdAt: `2020-03-16`, title: `Монстера`, price: `1000`, description: `Куплю монстеру зеленую в хорошем зеленом состоянии, буду поливать...`},
+  {id: 10, authorId: 1, type: `sell`, categories: [1], comments: [], createdAt: `2020-03-15`, title: `Мое старое кресло`, price: `4000`, description: `Продам свое старое кресло, чтобы сидеть и читать книги зимними...`},
+  {id: 11, authorId: 2, type: `sell`, categories: [2], comments: [], createdAt: `2020-03-14`, title: `Дедушкины часы`, price: `45 000`, description: `Продаю дедушкины часы в прекрасном состоянии, ходят до...`},
+  {id: 12, authorId: 2, type: `buy`, categories: [2], comments: [], createdAt: `2020-03-13`, title: `Радио Панасоник`, price: `32 000`, description: `Куплю вот такую итальянскую кофеварку, можно любой фирмы...`},
+  {id: 13, authorId: 3, type: `sell`, categories: [2], comments: [], createdAt: `2020-03-12`, title: `Штатив Sony`, price: `8 000`, description: `Продам свое старое кресло, чтобы сидеть и читать книги зимними...`},
+  {id: 14, authorId: 2, type: `sell`, categories: [2], comments: [], createdAt: `2020-03-11`, title: `Дрон с камерой`, price: `32 000`, description: `Куплю вот такую итальянскую кофеварку, можно любой фирмы...`},
+  {id: 15, authorId: 4, type: `sell`, categories: [2], comments: [], createdAt: `2020-03-10`, title: `Кофемашина`, price: `26 000`, description: `Продам свое старое кресло, чтобы сидеть и читать книги зимними...`},
 ];

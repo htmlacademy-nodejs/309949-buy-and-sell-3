@@ -1,7 +1,7 @@
 'use strict';
 
 const {Router} = require(`express`);
-const {globalData, currentUser} = require(`../templates/data/global`);
+const {globalData} = require(`../templates/data/global`);
 const {offers} = require(`../templates/data/offers`);
 const {categories} = require(`../templates/data/categories`);
 const {comments} = require(`../templates/data/comments`);
@@ -12,7 +12,7 @@ const myRouter = router();
 
 const myOffers = mapOffers(offers
   .slice()
-  .filter((offer) => offer.authorId === currentUser.id), categories);
+  .filter((offer) => offer.authorId === globalData.currentUser.id), categories);
 
 const offersWithComments = offers
   .map((offer) => {
@@ -31,6 +31,7 @@ myRouter.get(`/`, (req, res) => {
     path: req.baseUrl
   });
 });
+
 myRouter.get(`/comments`, (req, res) => {
   res.render(`comments`, {
     ...globalData,

@@ -11,7 +11,7 @@ li(class=`tickets-list__item ${(path && path === `/my`) ? `js-card` : ``}`)
         h3.ticket-card__title
           a(href=`/offers/${val.id}`)= val.title
         p.ticket-card__price.
-          #[span(class=`js-sum`)= val.price] ₽
+          #[span(class=`js-sum`)= val.price.toLocaleString(`ru-Ru`)] ₽
       .ticket-card__desc
         p= val.description
     if (path && path === `/my`)

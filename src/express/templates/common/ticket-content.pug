@@ -1,0 +1,31 @@
+.ticket__content
+  .ticket__img
+    if offer.image
+      img(src= offer.image srcset= `${offer.retina} 2x` alt=`Изображение товара`)
+    else
+      .ticket__img
+  .ticket__info
+    h2.ticket__title= offer.title
+    .ticket__header
+      p.ticket__price.
+        #[span(class=`js-sum`)= offer.price.toLocaleString(`ru-Ru`)] ₽
+      p.ticket__action= `${offer.type === `buy` ? `Куплю` : offer.type === `sell` ? `Продам` : `Не знаю` }`
+    .ticket__desc
+      p= offer.description
+    .ticket__data
+      p
+        b Дата добавления:&#x20;
+        span= offer.createdAt
+      p
+        b Автор:&#x20;
+        a(href=`#`)= offer.author.name
+      p
+        b Контакты:&#x20;
+        a(href=`mailto:${offer.author.email}`)= offer.author.email
+    ul.ticket__tags
+      each category in offer.categories
+        li
+          a(href=`/offers/category/${category.id}` class=`category-tile category-tile--small`)
+            span.category-tile__image
+              img(src= category.image srcset= `${category.retina} 2x` alt=`Иконка категории`)
+            span.category-tile__label= category.title

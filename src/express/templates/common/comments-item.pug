@@ -6,4 +6,5 @@ li.js-card
       p.comment-card__author= comment.author.name
     .comment-card__content
       p= comment.text
-    button(class=`comment-card__delete js-delete` type=`button`) Удалить
+    if path && path === `/my/comments`
+      button(class=`comment-card__delete js-delete` type=`button`) Удалить

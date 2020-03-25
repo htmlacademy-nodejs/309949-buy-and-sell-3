@@ -7,11 +7,18 @@ const footerItems = [
   {title: `Создать объявление`, url: `/offers/add`}
 ];
 
-module.exports.globalData = {
-  isLoggedIn,
-  footerItems
+const currentUser = {
+  id: 1,
+  name: `Денис Шкатулкин`,
+  email: `email@example.com`,
+  image: `/img/avatar.jpg`,
+  retina: `/img/avatar@2x.jpg`
 };
 
-module.exports.currentUser = {id: 1};
+module.exports.globalData = {
+  isLoggedIn,
+  currentUser,
+  footerItems
+};
 
 module.exports.isError = false;

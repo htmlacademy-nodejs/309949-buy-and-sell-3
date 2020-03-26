@@ -1,0 +1,18 @@
+li(class=`tickets-list__item ${(path && path === `/my`) ? `js-card` : ``}`)
+  div(class= `ticket-card ticket-card--color${val.color}`)
+    .ticket-card__img
+      img(src= val.image srcset= `${val.retina} 2x` alt=`Изображение товара`)
+    .ticket-card__info
+      span.ticket-card__label= `${val.type === `buy` ? `Куплю` : val.type === `sell` ? `Продам` : `Не знаю` }`
+      .ticket-card__categories
+        each category in val.categories
+          a(href=`/offers/category/${category.id}`)= category.title
+      .ticket-card__header
+        h3.ticket-card__title
+          a(href=`/offers/${val.id}`)= val.title
+        p.ticket-card__price.
+          #[span(class=`js-sum`)= val.price.toLocaleString(`ru-Ru`)] ₽
+      .ticket-card__desc
+        p= val.description
+    if (path && path === `/my`)
+      button(class=`ticket-card__del js-delete` type=`button`) Удалить

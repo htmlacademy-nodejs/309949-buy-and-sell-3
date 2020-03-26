@@ -1,0 +1,10 @@
+div(class=`form__field ${val.class || ``}`)
+  case val.type
+    when `text`
+    when `email`
+    when `password`
+      input(type=`${val.type}` name=`${val.id}` id=`${val.id}` class=`js-field` required=`${val.required || false}` value=`${val.value || ``}`)
+    when `textarea`
+      textarea(name=`${val.name}` id=`${val.id}` cols=`30` rows=`10` maxlength=`400` minlength=`50` class=`js-field`)= `${val.value || ``}`
+  label(for=`${val.id}`)= val.title
+  span= `${val.required ? `Обязательное поле` : ``}`

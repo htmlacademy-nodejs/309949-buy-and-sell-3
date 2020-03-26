@@ -1,0 +1,26 @@
+extends ../layout/layout.pug
+
+block content
+  section.search-results
+    h1.visually-hidden Результаты поиска
+    .search-results__wrapper
+      if searchResults.length
+        p.search-results__label Найдено
+          span.js-results= `${searchResults.length} публикации`
+        ul.search-results__list
+          each val in searchResults
+            include ../common/offers-item
+      else
+        .search-results__message
+          p Не найдено #[br] ни одной публикации
+  section.tickets-list
+    h2.visually-hidden Самые новые предложения
+    .tickets-list__wrapper
+      .tickets-list__header
+        p.tickets-list__title Самое свежее
+        a(href=`#` class=`tickets-list__link`) Еще 25
+      ul
+        each val in offersRecent
+          include ../common/offers-item
+
+

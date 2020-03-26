@@ -1,0 +1,17 @@
+doctype html
+html(lang='ru')
+  include ./head.pug
+  body.body-server
+    main
+      section.error
+        h1.error__title= error.id
+        h2.error__subtitle= error.subtitle
+        ul.error__list
+          each errorItem in errorItems
+            li.error__item
+              a(href= errorItem.href)= errorItem.name
+        include ../common/search-item
+        a.error__logo.logo&attributes({href: `/`})
+          img(src=`/img/logo.svg` width=`179` height=`34` alt=`Логотип Куплю Продам`)
+    script(src='/js/vendor.js')
+    script(src='/js/main.js')

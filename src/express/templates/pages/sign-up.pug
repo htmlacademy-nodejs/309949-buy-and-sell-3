@@ -1,0 +1,18 @@
+extends ../layout/layout.pug
+
+block content
+  section.sign-up
+    form(class=`sign-up__form form` action=`#` method=`post` enctype=`multipart/form-data` autocomplete=`off`)
+      .sign-up__title
+        h2 Регистрация
+        a(class=`sign-up__link` href="/login") Вход
+      .sign-up__avatar-container.js-preview-container
+        .sign-up__avatar.js-preview
+        .sign-up__field-avatar
+          input(type=`file` id=`avatar` name=`avatar` class=`visually-hidden js-file-field`)
+          label(for=`avatar`)
+            span.sign-up__text-upload Загрузить аватар…
+            span.sign-up__text-another Загрузить другой аватар…
+      each val in registerFormInputs
+        include ../common/form-input
+      button(class=`sign-up__button btn btn--medium js-button` type=`submit` disabled=``) Создать аккаунт

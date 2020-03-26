@@ -1,0 +1,12 @@
+extends ../layout/layout.pug
+
+block content
+  section.tickets-list
+    h2.visually-hidden Самые новые предложения
+    .tickets-list__wrapper
+      .tickets-list__header
+        a(href=`/offers/add` class="tickets-list__btn btn btn--big")
+          span Новая публикация
+      ul
+        each val in myOffers
+          include ../common/offers-item

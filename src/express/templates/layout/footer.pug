@@ -1,0 +1,14 @@
+footer.page-footer
+  .page-footer__wrapper
+    .page-footer__col
+      a(href='#' class='page-footer__logo-academy' aria-label='Ссылка на сайт HTML-Академии')
+        svg(width='132' height='46')
+          use(xlink:href="/img/sprite_auto.svg#logo-htmlac")
+    .page-footer__col
+      a(href= path && path === `/` ? false : `/` class='page-footer__logo logo')
+        img(src='/img/logo.svg' width='179' height='35' alt='Логотип Куплю Продам')
+    .page-footer__col
+      ul.page-footer__nav
+        each val in footerItems
+          li
+            a(href= val.url)= val.title

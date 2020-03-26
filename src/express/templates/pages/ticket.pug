@@ -1,0 +1,32 @@
+extends ../layout/layout.pug
+
+block content
+  section.ticket
+    .ticket__wrapper
+      h1.visually-hidden Карточка объявления
+      include ../common/ticket-content
+      .ticket__comments
+        unless isLoggedIn
+          .ticket__warning
+            p.
+              Отправка комментариев доступна #[br] только для зарегистрированных пользователей.
+            a(href=`/register` class=`btn btn--big`) Вход и регистрация
+        h2.ticket__subtitle Коментарии
+        .ticket__comment-form
+          if isloggedIn
+            form(action=`#` method=`post` class=`form comment-form`)
+              .comment-form__header
+                a(href=`#` class=`comment-form__avatar avatar`)
+                  img(src= currentUser.image srcset=`${currentUser.retina} 2x` alt="Аватар пользователя")
+                p.comment-form__author Вам слово
+              .comment-form__field
+                each val in commentsFormInputs
+                  include ../common/form-input
+          if offer.comments.length
+            .ticket__comments-list
+              ul.comments-list
+                each comment in offer.comments
+                  include ../common/comments-item
+          else
+            .ticket__message
+              p У этой публикации еще нет ни одного комментария.

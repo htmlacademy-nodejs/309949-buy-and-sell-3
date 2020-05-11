@@ -1,26 +1,20 @@
 'use strict';
 
 const express = require(`express`);
-const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
+
+const getMockData = require(`../lib/get-mock-data`);
 
 const {
   DEFAULT_PORT,
-  FILE_NAME,
   HttpCode
 } = require(`../cli/constants`);
 
 const app = express();
 app.use(express.json());
 app.get(`/offers`, async (req, res) => {
-  try {
-    const fileContent = await fs.readFile(FILE_NAME);
-    const mocks = JSON.parse(fileContent);
-    res.json(mocks);
-  } catch (err) {
-    console.log(`We've got an error here, probably file is nonexistent or empty: ${err}`);
-    res.json([]);
-  }
+  const data = await getMockData();
+  res.json(data);
 });
 
 app.use((req, res) => res

@@ -16,12 +16,9 @@ const {
   FilePath,
   OfferType,
   SumRestrict,
-  PictureRestrict
-} = require(`../cli/constants`);
-
-const {
+  PictureRestrict,
   ExitCode
-} = require(`../../constants`);
+} = require(`../constants`);
 
 const readContent = async (filePath) => {
   try {

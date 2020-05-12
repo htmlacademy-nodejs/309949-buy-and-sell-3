@@ -3,23 +3,12 @@
 const express = require(`express`);
 const chalk = require(`chalk`);
 
-const getMockData = require(`../lib/get-mock-data`);
+const routes = require(`../api`);
 
-const {
-  DEFAULT_PORT,
-  HttpCode
-} = require(`../cli/constants`);
+const {API_PREFIX, DEFAULT_PORT} = require(`../constants`);
 
 const app = express();
-app.use(express.json());
-app.get(`/offers`, async (req, res) => {
-  const data = await getMockData();
-  res.json(data);
-});
-
-app.use((req, res) => res
-  .status(HttpCode.NOT_FOUND)
-  .send(`Not found`));
+app.use(API_PREFIX, routes);
 
 module.exports = {
   name: `--server`,

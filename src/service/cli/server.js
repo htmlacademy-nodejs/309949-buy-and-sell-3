@@ -8,6 +8,10 @@ const routes = require(`../api`);
 const {API_PREFIX, DEFAULT_PORT} = require(`../constants`);
 
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 app.use(API_PREFIX, routes);
 
 module.exports = {

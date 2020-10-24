@@ -5,12 +5,11 @@ const {HttpCode} = require(`../constants`);
 const keysValidator = require(`../middleware/keysValidator`);
 const offerExists = require(`../middleware/offerExists`);
 
-const route = new Router();
-
 const offerKeys = [`category`, `description`, `picture`, `title`, `type`, `sum`];
 const commentKeys = [`text`];
 
 module.exports = (app, offerService, commentService) => {
+  const route = new Router();
   app.use(`/offers`, route);
 
   // Offers

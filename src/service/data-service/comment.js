@@ -9,7 +9,7 @@ class CommentService {
     const {text} = comment;
 
     offer.comments = [...offer.comments, {id: nanoid(MAX_ID_LENGTH), text}];
-    return offer;
+    return comment;
   }
 
   findAll(offer) {

@@ -14,21 +14,6 @@ module.exports.shuffle = (someArray) => {
   return someArray;
 };
 
-module.exports.mapOffers = (offers, categories) => {
-  return offers.map((offer) => {
-    const offerNumber = offer.id.toString().length === 1 ? `0${offer.id}` : offer.id;
-    return {
-      ...offer,
-      color: offerNumber,
-      image: `/img/item${offerNumber}.jpg`,
-      retina: `/img/item${offerNumber}@2x.jpg`,
-      categories: offer.categories.map((cat) => {
-        return categories.find((category) => category.id === cat);
-      })
-    };
-  });
-};
-
 module.exports.mapOffer = (offer, categories, comments, users) => {
   const offerNumber = offer.id.toString().length === 1 ? `0${offer.id}` : offer.id;
   return {

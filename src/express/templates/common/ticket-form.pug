@@ -1,26 +1,32 @@
 section.ticket-form
   .ticket-form__wrapper
-    h1.ticket-form__title= editMode ? `Редактировать публикацию` : `Новая публикация`
+    h1.ticket-form__title Редактировать публикацию
     .ticket-form__tile
       form(class=`ticket-form__form form` action=`#` method=`post` enctype=`multipart/form-data` autocomplete=`off`)
-        div(class=`ticket-form__avatar-container js-preview-container ${editMode && offer.image ? `uploaded` : ``}`)
+        .ticket-form__avatar-container.js-preview-container.uploaded
           .ticket-form__avatar.js-preview
-            if editMode && offer.image
-              img(src=`${offer.image}` srcset=`${offer.retina} 2x` alt="")
+            img(src= `/img/item${offer.picture}.jpg` srcset= `/img/item${offer.picture}@2x.jpg 2x` alt=`Изображение товара`)
           .ticket-form__field-avatar
-            input(type=`file` id=`avatar` name=`avatar` class=`visually-hidden js-file-field`)
-            label(for=`avatar`)
+            input#avatar.visually-hidden.js-file-field(type="file" name="avatar")
+            label(for="avatar")
               span.ticket-form__text-upload Загрузить фото…
               span.ticket-form__text-another Загрузить другое фото…
         .ticket-form__content
-          each row in ticketFormInputs
-            .ticket-form__row
-              each val in row
-                include ../common/form-input
           .ticket-form__row
-            select(name=`category` id=`category-field` data-label=`Выбрать категорию публикации` class=`form__select js-multiple-select` multiple=``)
-              each option in selectOptions
-                option(value=`${option.id}` selected=option.selected)= option.title
+            .form__field
+              input#ticket-name.js-field(type="text" name="ticket-name" value=offer.title required="")
+              label(for="ticket-name") Название
+              span Обязательное поле
+          .ticket-form__row
+            .form__field
+              textarea#comment-field.js-field(name="comment" cols="30" rows="10" maxlength="400" minlength="50")
+                | #{offer.description}
+              label(for="comment-field") Описание
+              span Обязательное поле
+          .ticket-form__row
+            select#category-field.form__select.js-multiple-select(name="category" data-label="Выбрать категорию публикации" multiple="")
+              each category, index in categories
+                option(value=index selected=offer.category.includes(category)) #{category}
           .ticket-form__row
             .form__field.form__field--price
               input(type=`number` name=`price` id=`price-field` class=`js-field js-price` min=`1` required=`` value= (editMode && offer.price ? offer.price : ``))
@@ -28,9 +34,9 @@ section.ticket-form
               span Обязательное поле
             .form__switch.switch
               .switch__item
-                input(type=`radio` id=`buy-field` name=`action` value=`buy` class=`visually-hidden` checked= (editMode && offer.type === `buy`))
+                input(type=`radio` id=`buy-field` name=`action` value=`buy` class=`visually-hidden` checked= (editMode && offer.type === `offer`))
                 label(for=`buy-field` class=`switch__button`) Куплю
               .switch__item
-                input(type=`radio` id=`sell-field` name=`action` value=`sell` class=`visually-hidden` checked= (editMode && offer.type === `sell`))
+                input(type=`radio` id=`sell-field` name=`action` value=`sell` class=`visually-hidden` checked= (editMode && offer.type === `sale`))
                 label(for=`sell-field` class=`switch__button`) Продам
         button(class=`form__button btn btn--medium js-button` type=`submit`)= editMode ? `Сохранить` : `Опубликовать`

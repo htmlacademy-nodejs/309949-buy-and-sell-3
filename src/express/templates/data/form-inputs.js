@@ -15,8 +15,3 @@ module.exports.registerFormInputs = [
 module.exports.commentsFormInputs = [
   {id: `comment-field`, type: `textarea`, name: `comment`, title: `Текст комментария`, required: true},
 ];
-
-module.exports.ticketFormInputs = [
-  [{id: `ticket-name`, type: `text`, title: `Название`, required: true}],
-  [{id: `comment-field`, type: `textarea`, name: `comment`, title: `Описание`, required: true}],
-];

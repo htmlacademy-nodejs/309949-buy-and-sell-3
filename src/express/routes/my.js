@@ -1,41 +1,36 @@
 'use strict';
 
 const {Router} = require(`express`);
+const api = require(`../api`).getAPI();
 const {globalData} = require(`../templates/data/global`);
-const {offers} = require(`../templates/data/offers`);
-const {categories} = require(`../templates/data/categories`);
-const {comments} = require(`../templates/data/comments`);
-const {mapOffers} = require(`../../utils`);
 
 const router = Router;
 const myRouter = router();
 
-const myOffers = mapOffers(offers
-  .slice()
-  .filter((offer) => offer.authorId === globalData.currentUser.id), categories);
+// const getOffersWithComments = (offers) => offers
+//   .map((offer) => {
+//     return {
+//       ...offer,
+//       comments: offer.comments
+//       .map((comment) => comments
+//         .find((item) => item.id === comment))
+//     };
+//   });
 
-const offersWithComments = offers
-  .map((offer) => {
-    return {
-      ...offer,
-      comments: offer.comments
-      .map((comment) => comments
-        .find((item) => item.id === comment))
-    };
-  });
-
-myRouter.get(`/`, (req, res) => {
+myRouter.get(`/`, async (req, res) => {
+  const offers = await api.getOffers();
   res.render(`my-tickets`, {
     ...globalData,
-    myOffers,
+    myOffers: offers,
     path: req.baseUrl
   });
 });
 
-myRouter.get(`/comments`, (req, res) => {
+myRouter.get(`/comments`, async (req, res) => {
+  const offers = await api.getOffers();
   res.render(`comments`, {
     ...globalData,
-    offersWithComments,
+    offersWithComments: offers.slice(0, 3),
     path: `${req.baseUrl}${req.path}`
   });
 });

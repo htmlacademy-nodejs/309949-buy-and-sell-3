@@ -4,8 +4,8 @@ if offer.comments.length
       a(href=`#` class=`announce-card`)
         h2.announce-card__title= offer.title
         span.announce-card__info
-          span.announce-card__price= `₽ ${offer.price}`
-          span.announce-card__type= `${offer.type === `buy` ? `Куплю` : offer.type === `sell` ? `Продам` : `Не знаю` }`
+          span.announce-card__price= `₽ ${offer.sum}`
+          +ticketLabel(offer.type)(class=`announce-card__type`)
     ul.comments-list
       each comment in offer.comments
         include ../common/comments-item

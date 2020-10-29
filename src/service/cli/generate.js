@@ -31,7 +31,7 @@ const readContent = async (filePath) => {
 };
 
 const getPictureFileName = (num) => {
-  return num.toString().length > 1 ? num : `0${num}`;
+  return `item${num.toString().padStart(2, 0)}.jpg`;
 };
 
 const generateComments = (count, comments) => (

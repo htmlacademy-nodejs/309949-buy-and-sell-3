@@ -9,11 +9,9 @@ const myRoutes = require(`./routes/my`);
 const searchRoutes = require(`./routes/search`);
 const offersRoutes = require(`./routes/offers`);
 
-const {DEFAULT_PORT, PUBLIC_DIR} = require(`./constants`);
+const {DEFAULT_PORT, PUBLIC_DIR, UPLOAD_DIR} = require(`./constants`);
 
 const app = express();
-
-app.use(express.static(path.resolve(__dirname, PUBLIC_DIR)));
 
 app.set(`views`, path.resolve(__dirname, `templates/pages`));
 app.set(`view engine`, `pug`);
@@ -24,5 +22,8 @@ app.use(`/login`, loginRoutes);
 app.use(`/my`, myRoutes);
 app.use(`/search`, searchRoutes);
 app.use(`/offers`, offersRoutes);
+
+app.use(express.static(path.resolve(__dirname, PUBLIC_DIR)));
+app.use(express.static(path.resolve(__dirname, UPLOAD_DIR)));
 
 app.listen(DEFAULT_PORT, () => console.log(`Сервер запущен на порту: ${DEFAULT_PORT}`));

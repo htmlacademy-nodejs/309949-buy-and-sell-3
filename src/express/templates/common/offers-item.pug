@@ -1,7 +1,7 @@
 li(class=`tickets-list__item ${(path && path === `/my`) ? `js-card` : ``}`)
-  div(class= `ticket-card ticket-card--color${val.picture}`)
+  div(class= `ticket-card ticket-card--color01`)
     .ticket-card__img
-      img(src= `/img/item${val.picture}.jpg` srcset= `/img/item${val.picture}@2x.jpg 2x` alt=`Изображение товара`)
+      img(src= `/img/${val.picture}` srcset= `/img/${val.picture} 2x` alt=`Изображение товара`)
     .ticket-card__info
       +ticketLabel(val.type)
       .ticket-card__categories

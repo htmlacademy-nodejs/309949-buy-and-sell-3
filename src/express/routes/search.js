@@ -1,35 +1,40 @@
 'use strict';
-const {globalData} = require(`../templates/data/global`);
-const {categories} = require(`../templates/data/categories`);
-const {offers} = require(`../templates/data/offers`);
-const {searchItems} = require(`../templates/data/search`);
-const {mapOffers} = require(`../../utils`);
+
 const {Router} = require(`express`);
+const api = require(`../api`).getAPI();
+const {globalData} = require(`../templates/data/global`);
 
 const router = Router;
 const searchRouter = router();
 
-const searchOffers = searchItems.map((item) => offers.find((offer) => offer.id === item));
-
-const searchResults = mapOffers(searchOffers
-  .slice(), categories);
-
-const offersRecent = mapOffers(offers
+const getRecentOffers = (offers) => offers
   .slice()
   .sort((a, b) => {
     const dateA = new Date(a.createdAt);
     const dateB = new Date(b.createdAt);
     return dateB - dateA;
   })
-  .slice(0, 8), categories);
+  .slice(0, 8);
 
-searchRouter.get(`/`, (req, res) => {
-  res.render(`search-result`, {
-    ...globalData,
-    searchResults,
-    offersRecent,
-    path: req.baseUrl
-  });
+searchRouter.get(`/`, async (req, res) => {
+  const offers = await api.getOffers();
+  try {
+    const {query} = req.query;
+    const results = await api.search(query);
+    res.render(`search-result`, {
+      ...globalData,
+      results,
+      offersRecent: getRecentOffers(offers),
+      path: req.baseUrl
+    });
+  } catch (error) {
+    res.render(`search-result`, {
+      ...globalData,
+      results: [],
+      offersRecent: getRecentOffers(offers),
+      path: req.baseUrl
+    });
+  }
 });
 
 module.exports = searchRouter;

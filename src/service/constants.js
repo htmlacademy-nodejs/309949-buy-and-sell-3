@@ -22,8 +22,8 @@ module.exports.FilePath = {
 };
 
 module.exports.OfferType = {
-  offer: `offer`,
-  sale: `sale`,
+  buy: `buy`,
+  sell: `sell`,
 };
 
 module.exports.SumRestrict = {

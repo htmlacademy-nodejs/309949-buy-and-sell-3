@@ -5,6 +5,7 @@ const {nanoid} = require(`nanoid`);
 
 const {
   getRandomInt,
+  readContent,
   shuffle,
 } = require(`../../utils`);
 
@@ -19,16 +20,6 @@ const {
   PictureRestrict,
   ExitCode
 } = require(`../constants`);
-
-const readContent = async (filePath) => {
-  try {
-    const content = await fs.readFile(filePath, `utf8`);
-    return content.split(`\n`);
-  } catch (err) {
-    console.error(chalk.red(err));
-    return [];
-  }
-};
 
 const getPictureFileName = (num) => {
   return `item${num.toString().padStart(2, 0)}.jpg`;
@@ -59,12 +50,12 @@ const generateOffers = (count, titles, categories, sentences, comments) => (
 module.exports = {
   name: `--generate`,
   async run(args) {
-    const sentences = await readContent(FilePath.sentences);
-    const titles = await readContent(FilePath.titles);
-    const categories = await readContent(FilePath.categories);
+    const sentences = await readContent(fs, chalk, FilePath.sentences);
+    const titles = await readContent(fs, chalk, FilePath.titles);
+    const categories = await readContent(fs, chalk, FilePath.categories);
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
-    const comments = await readContent(FilePath.comments);
+    const comments = await readContent(fs, chalk, FilePath.comments);
     const content = JSON.stringify(generateOffers(countOffer, titles, categories, sentences, comments));
 
     if (count > 1000) {

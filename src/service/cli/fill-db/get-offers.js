@@ -23,7 +23,7 @@ module.exports = (count, titles, sentences) => {
 '${shuffle(sentences).slice(1, 5).join(` `)}', \
 NULL, \
 '${Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)]}', \
-${getRandomInt(SumRestrict.min, SumRestrict.max)}, \
+${getRandomInt(SumRestrict.MIN, SumRestrict.MAX)}, \
 ${getRandomInt(TEMPLATE_USERS[0].id, TEMPLATE_USERS[1].id)}, \
 NOW())`;
   };

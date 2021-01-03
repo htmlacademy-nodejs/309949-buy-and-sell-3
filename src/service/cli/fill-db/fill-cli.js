@@ -25,14 +25,14 @@ module.exports = {
     const [count] = args;
 
     if (count > MAX_OFFERS) {
-      console.error(chalk.red(`Count exceeded ${MAX_OFFERS} items. Process exited with exit code ${ExitCode.failure}`));
-      process.exit(ExitCode.failure);
+      console.error(chalk.red(`Count exceeded ${MAX_OFFERS} items. Process exited with exit code ${ExitCode.FAILURE}`));
+      process.exit(ExitCode.FAILURE);
     } else {
       try {
-        const categories = await readContent(fs, chalk, FilePath.categories);
-        const sentences = await readContent(fs, chalk, FilePath.sentences);
-        const titles = await readContent(fs, chalk, FilePath.titles);
-        const comments = await readContent(fs, chalk, FilePath.comments);
+        const categories = await readContent(fs, chalk, FilePath.CATEGORIES);
+        const sentences = await readContent(fs, chalk, FilePath.SENTENCES);
+        const titles = await readContent(fs, chalk, FilePath.TITLES);
+        const comments = await readContent(fs, chalk, FilePath.COMMENTS);
         const content =
           `${fillTemplate(`users`, getUsers())}
 
@@ -47,8 +47,8 @@ ${fillTemplate(`comments`, getComments(count, comments, TEMPLATE_USERS))}
         await fs.writeFile(FILE_NAME, content);
         console.info(chalk.green(`Operation successful. File created.`));
       } catch (err) {
-        console.error(chalk.red(`Cannot write data to file... Process exited with exit code ${ExitCode.failure}`));
-        process.exit(ExitCode.failure);
+        console.error(chalk.red(`Cannot write data to file... Process exited with exit code ${ExitCode.FAILURE}`));
+        process.exit(ExitCode.FAILURE);
       }
     }
   }

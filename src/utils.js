@@ -26,3 +26,13 @@ module.exports.mapOffer = (offer, categories, comments, users) => {
     retina: `/img/item${offerNumber}@2x.jpg`,
   };
 };
+
+module.exports.readContent = async (fs, chalk, filePath) => {
+  try {
+    const content = await fs.readFile(filePath, `utf8`);
+    return content.split(`\n`);
+  } catch (err) {
+    console.error(chalk.red(err));
+    return [];
+  }
+};

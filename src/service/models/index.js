@@ -16,9 +16,6 @@ const define = (sequelize) => {
   Offer.hasMany(Comment, {as: Alias.COMMENTS, foreignKey: `offerId`});
   Comment.belongsTo(Offer, {foreignKey: `offerId`});
 
-  Offer.belongsToMany(Category, {through: `offerCategories`, as: Alias.CATEGORIES});
-  Category.belongsToMany(Offer, {through: `offerCategories`, as: Alias.OFFERS});
-
   class OfferCategory extends Model {}
   OfferCategory.init({}, {sequelize});
 

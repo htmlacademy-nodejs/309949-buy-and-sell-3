@@ -27,7 +27,7 @@ const getPopularOffers = (offers) => offers
   .slice(0, 8);
 
 homeRouter.get(`/`, async (req, res) => {
-  const offers = await api.getOffers();
+  const offers = await api.getOffers({comments: true});
   res.render(`main`, {
     ...globalData,
     categories,

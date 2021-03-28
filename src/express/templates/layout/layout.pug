@@ -3,7 +3,7 @@ html(lang='ru')
   include ./head.pug
   body
     mixin ticketLabel(type)
-      span(class != attributes.class || `ticket-card__label`) #{type === `offer` ? `Куплю` : type === `sale` ? `Продам` : `Не знаю`}
+      span(class != attributes.class || `ticket-card__label`) #{type === `BUY` ? `Куплю` : type === `SELL` ? `Продам` : `Не знаю`}
     include ./header.pug
     main.page-content
       block content

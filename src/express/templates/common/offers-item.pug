@@ -5,8 +5,8 @@ li(class=`tickets-list__item ${(path && path === `/my`) ? `js-card` : ``}`)
     .ticket-card__info
       +ticketLabel(val.type)
       .ticket-card__categories
-        each cat in val.category
-          a(href=`#`)= cat
+        each cat in val.categories
+          a(href=`#`)= cat.name
       .ticket-card__header
         h3.ticket-card__title
           a(href=`/offers/${val.id}`)= val.title

@@ -34,7 +34,7 @@ offersRouter.post(`/add`, upload.single(`avatar`), async (req, res) => {
     type: body.action,
     description: body.comment,
     title: body[`ticket-name`],
-    category: [body.category]
+    categories: body.category
   };
 
   try {

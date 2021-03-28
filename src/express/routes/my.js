@@ -7,16 +7,6 @@ const {globalData} = require(`../templates/data/global`);
 const router = Router;
 const myRouter = router();
 
-// const getOffersWithComments = (offers) => offers
-//   .map((offer) => {
-//     return {
-//       ...offer,
-//       comments: offer.comments
-//       .map((comment) => comments
-//         .find((item) => item.id === comment))
-//     };
-//   });
-
 myRouter.get(`/`, async (req, res) => {
   const offers = await api.getOffers();
   res.render(`my-tickets`, {
@@ -27,7 +17,7 @@ myRouter.get(`/`, async (req, res) => {
 });
 
 myRouter.get(`/comments`, async (req, res) => {
-  const offers = await api.getOffers();
+  const offers = await api.getOffers({comments: true});
   res.render(`comments`, {
     ...globalData,
     offersWithComments: offers.slice(0, 3),

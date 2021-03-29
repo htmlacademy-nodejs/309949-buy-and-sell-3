@@ -3,6 +3,6 @@ ul.categories-list__wrapper
     li.categories-list__item
       a(href=`/offers/category/${val.id}` class=`category-tile ${path && path === `/` ? `category-tile--default` : ``} ${pathId && pathId === val.id ? `category-tile--active` : ``}`)
         span.category-tile__image
-          img(src= val.image srcset= `${val.retina} 2x` alt=`Иконка категории`)
-        span.category-tile__label= `${val.title} `
+          +categoryImage(val)
+        span.category-tile__label= `${val.name} `
           span.category-tile__qty.js-qty= val.count

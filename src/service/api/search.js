@@ -8,7 +8,7 @@ const route = new Router();
 module.exports = (app, service) => {
   app.use(`/search`, route);
 
-  route.get(`/`, (req, res) => {
+  route.get(`/`, async (req, res) => {
     const {query = ``} = req.query;
 
     if (!query) {
@@ -16,7 +16,7 @@ module.exports = (app, service) => {
         .send(`Search query is empty`);
     }
 
-    const offers = service.findAll(query);
+    const offers = await service.findAll(query);
 
     if (offers.length <= 0) {
       return res.status(HttpCode.NOT_FOUND)

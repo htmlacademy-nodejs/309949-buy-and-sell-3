@@ -4,7 +4,9 @@ const {describe, beforeAll, test, expect} = require(`@jest/globals`);
 
 const express = require(`express`);
 const request = require(`supertest`);
+const Sequelize = require(`sequelize`);
 
+const initDB = require(`../../../lib/init-db`);
 const search = require(`../../search`);
 const DataService = require(`../../../data-service/search`);
 
@@ -12,9 +14,21 @@ const {HttpCode} = require(`../../../constants`);
 
 const mockData = require(`../mocks/searchMockData`);
 
+const mockCategories = [
+  `Разное`,
+  `Журналы`,
+  `Книги`
+];
+
+const mockDB = new Sequelize(`sqlite::memory:`, {logging: false});
+
 const app = express();
 app.use(express.json());
-search(app, new DataService(mockData));
+
+beforeAll(async () => {
+  await initDB(mockDB, {categories: mockCategories, offers: mockData});
+  search(app, new DataService(mockDB));
+});
 
 describe(`API returns offer based on search query`, () => {
   let response;
@@ -29,7 +43,7 @@ describe(`API returns offer based on search query`, () => {
 
   test(`Status code 200`, () => expect(response.statusCode).toBe(HttpCode.OK));
   test(`1 offer found`, () => expect(response.body.length).toBe(1));
-  test(`Offer has correct id`, () => expect(response.body[0].id).toBe(`DXZrE7`));
+  test(`Offer has correct title`, () => expect(response.body[0].title).toBe(`Продам новую приставку Sony Playstation 5`));
 });
 
 test(`API returns code 404 if nothing is found`,

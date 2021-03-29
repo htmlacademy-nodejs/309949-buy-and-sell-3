@@ -14,19 +14,6 @@ module.exports.shuffle = (someArray) => {
   return someArray;
 };
 
-module.exports.mapOffer = (offer, categories, comments, users) => {
-  const offerNumber = offer.id.toString().length === 1 ? `0${offer.id}` : offer.id;
-  return {
-    ...offer,
-    createdAt: new Date(offer.createdAt).toLocaleDateString(`ru-RU`, {year: `numeric`, month: `long`, day: `numeric`}),
-    categories: offer.categories.map((cat) => categories.find((category) => category.id === cat)),
-    comments: offer.comments.map((item) => comments.find((comment) => comment.id === item)),
-    author: users.find((user) => user.id === offer.authorId),
-    image: `/img/item${offerNumber}.jpg`,
-    retina: `/img/item${offerNumber}@2x.jpg`,
-  };
-};
-
 module.exports.readContent = async (fs, chalk, filePath) => {
   try {
     const content = await fs.readFile(filePath, `utf8`);

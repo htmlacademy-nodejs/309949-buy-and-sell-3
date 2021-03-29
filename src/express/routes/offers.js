@@ -34,7 +34,7 @@ offersRouter.post(`/add`, upload.single(`avatar`), async (req, res) => {
     type: body.action,
     description: body.comment,
     title: body[`ticket-name`],
-    category: [body.category]
+    categories: body.category
   };
 
   try {
@@ -86,18 +86,14 @@ offersRouter.get(`/edit/:id`, async (req, res) => {
   });
 });
 
-// offersRouter.get(`/:id`, async (req, res) => {
-//   const offers = await api.getOffers();
-//   const pathId = Number(req.params.id);
-//
-//   let offer = offers.find((item) => item.id === pathId);
-//   offer = mapOffer(offer, categories, comments, users);
-//
-//   res.render(`ticket`, {
-//     ...globalData,
-//     commentsFormInputs,
-//     offer
-//   });
-// });
+offersRouter.get(`/:id`, async (req, res) => {
+  const {id} = req.params;
+  const offer = await api.getOffer(id, true);
+
+  res.render(`ticket`, {
+    ...globalData,
+    offer
+  });
+});
 
 module.exports = offersRouter;

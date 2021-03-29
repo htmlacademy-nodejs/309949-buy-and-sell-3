@@ -5,7 +5,7 @@ const {HttpCode} = require(`../constants`);
 const keysValidator = require(`../middleware/keysValidator`);
 const offerExists = require(`../middleware/offerExists`);
 
-const offerKeys = [`category`, `description`, `picture`, `title`, `type`, `sum`];
+const offerKeys = [`categories`, `description`, `picture`, `title`, `type`, `sum`];
 const commentKeys = [`text`];
 
 module.exports = (app, offerService, commentService) => {
@@ -52,17 +52,18 @@ module.exports = (app, offerService, commentService) => {
 
   // Comments
 
-  route.post(`/:offerId/comments`, [offerExists(offerService), keysValidator(commentKeys)], async (req, res) => {
+  route.post(`/:offerId/comments`, [offerExists(offerService), keysValidator(commentKeys)], (req, res) => {
     const {offer} = res.locals;
-    const comment = await commentService.create(req.body, offer);
+    const comment = commentService.create(offer, req.body);
 
     return res.status(HttpCode.CREATED)
       .json(comment);
   });
 
   route.get(`/:offerId/comments`, offerExists(offerService), async (req, res) => {
-    const {offer} = res.locals;
-    const comments = await commentService.findAll(offer);
+    const {offerId} = req.params;
+
+    const comments = await commentService.findAll(offerId);
 
     res.status(HttpCode.OK)
       .json(comments);
@@ -70,16 +71,14 @@ module.exports = (app, offerService, commentService) => {
 
   route.delete(`/:offerId/comments/:commentId`, offerExists(offerService), async (req, res) => {
     const {commentId} = req.params;
-    const {offer} = res.locals;
-    const comment = await commentService.drop(commentId, offer);
+    const deleted = await commentService.drop(commentId);
 
-    if (!comment) {
+    if (!deleted) {
       return res.status(HttpCode.NOT_FOUND)
         .send(`Comment with id ${commentId} not found`);
     }
-
     return res.status(HttpCode.OK)
-      .json(comment);
+      .json(deleted);
   });
 };
 

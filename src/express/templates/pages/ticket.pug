@@ -22,7 +22,7 @@ block content
               .comment-form__field
                 each val in commentsFormInputs
                   include ../common/form-input
-          if offer.comments.length
+          if offer.comments
             .ticket__comments-list
               ul.comments-list
                 each comment in offer.comments

@@ -12,7 +12,7 @@ const currentUser = {
   name: `Денис Шкатулкин`,
   email: `email@example.com`,
   image: `/img/avatar.jpg`,
-  retina: `/img/avatar@2x.jpg`
+  retina: `img/avatar@2x.jpg`
 };
 
 module.exports.globalData = {

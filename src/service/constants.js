@@ -32,7 +32,7 @@ module.exports.SumRestrict = {
 };
 
 module.exports.PictureRestrict = {
-  MIN: 0,
+  MIN: 1,
   MAX: 16
 };
 

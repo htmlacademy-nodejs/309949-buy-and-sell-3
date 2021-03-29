@@ -4,8 +4,7 @@ const chalk = require(`chalk`);
 const {getLogger} = require(`../lib/logger`);
 
 const sequelize = require(`../lib/sequelize`);
-const defineModels = require(`../models`);
-const Alias = require(`../models/aliases`);
+const initDatabase = require(`../lib/init-db`);
 
 const logger = getLogger({});
 
@@ -64,7 +63,7 @@ const generateOffers = (count, titles, categories, sentences, comments) => (
 );
 
 module.exports = {
-  name: `--fill-db`,
+  name: `--filldb`,
   async run(args) {
     const [count] = args;
 
@@ -86,22 +85,11 @@ module.exports = {
       const categories = await readContent(fs, chalk, FilePath.CATEGORIES);
       const comments = await readContent(fs, chalk, FilePath.COMMENTS);
 
-      const {Category, Offer} = defineModels(sequelize);
-
-      await sequelize.sync({force: true});
-
-      const categoryModels = await Category.bulkCreate(
-          categories.map((item) => ({name: item}))
-      );
-
       const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
 
-      const offers = generateOffers(countOffer, titles, categoryModels, sentences, comments);
-      const offerPromises = offers.map(async (offer) => {
-        const offerModel = await Offer.create(offer, {include: [Alias.COMMENTS]});
-        await offerModel.addCategories(offer.categories);
-      });
-      await Promise.all(offerPromises);
+      const offers = generateOffers(countOffer, titles, categories, sentences, comments);
+      return initDatabase(sequelize, {offers, categories});
     }
+    return null; // consistent return
   }
 };

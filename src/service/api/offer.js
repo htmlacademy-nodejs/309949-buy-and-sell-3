@@ -52,9 +52,9 @@ module.exports = (app, offerService, commentService) => {
 
   // Comments
 
-  route.post(`/:offerId/comments`, [offerExists(offerService), keysValidator(commentKeys)], (req, res) => {
-    const {offer} = res.locals;
-    const comment = commentService.create(offer, req.body);
+  route.post(`/:offerId/comments`, [offerExists(offerService), keysValidator(commentKeys)], async (req, res) => {
+    const {offerId} = req.params;
+    const comment = await commentService.create(offerId, req.body);
 
     return res.status(HttpCode.CREATED)
       .json(comment);

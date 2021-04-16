@@ -15,16 +15,6 @@ const getRecentOffers = (offers) => offers
   })
   .slice(0, 8);
 
-// const getPopularOffers = (offers) => offers
-//   .slice()
-//   .filter((offer) => offer.comments.length !== 0)
-//   .sort((a, b) => {
-//     const commentsLengthA = (a.comments || []).length;
-//     const commentsLengthB = (b.comments || []).length;
-//     return commentsLengthB - commentsLengthA;
-//   })
-//   .slice(0, 8);
-
 homeRouter.get(`/`, async (req, res) => {
   const [
     offers,

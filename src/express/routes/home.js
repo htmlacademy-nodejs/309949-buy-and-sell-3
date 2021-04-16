@@ -2,33 +2,34 @@
 const {Router} = require(`express`);
 const api = require(`../api`).getAPI();
 const {globalData} = require(`../templates/data/global`);
+const {OFFERS_PER_PAGE} = require(`../constants`);
 
 const router = Router;
 const homeRouter = router();
 
-const getRecentOffers = (offers) => offers
-  .slice()
-  .sort((a, b) => {
-    const dateA = new Date(a.createdAt);
-    const dateB = new Date(b.createdAt);
-    return dateB - dateA;
-  })
-  .slice(0, 8);
-
 homeRouter.get(`/`, async (req, res) => {
+  let {page = 1} = req.query;
+  page = +page;
+
+  const limit = OFFERS_PER_PAGE;
+  const offset = (page - 1) * OFFERS_PER_PAGE;
+
   const [
-    offers,
+    {count, offers},
     categories
   ] = await Promise.all([
-    api.getOffers(),
+    api.getOffers({limit, offset}),
     api.getCategories(true)
   ]);
+
+  const totalPages = Math.ceil(count / OFFERS_PER_PAGE);
 
   res.render(`main`, {
     ...globalData,
     categories,
-    offersRecent: await getRecentOffers(offers),
-    // offersPopular: await getPopularOffers(offers),
+    totalPages,
+    page,
+    offersRecent: offers,
     path: req.path
   });
 });

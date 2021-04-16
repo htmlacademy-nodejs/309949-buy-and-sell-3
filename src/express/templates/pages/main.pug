@@ -13,14 +13,7 @@ block content
         ul
           each val in offersRecent
             include ../common/offers-item
-    //section.tickets-list
-    //  h2.visually-hidden Самые обсуждаемые предложения
-    //  .tickets-list__wrapper
-    //    .tickets-list__header
-    //      p.tickets-list__title Самые обсуждаемые
-    //    ul
-    //      each val in offersPopular
-    //        include ../common/offers-item
+        +pagination(page, totalPages, 2, `?`)
   else
     .message
       .message__text

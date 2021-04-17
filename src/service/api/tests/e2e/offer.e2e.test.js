@@ -58,32 +58,32 @@ describe(`API returns an offer with given id`, () => {
   test(`Offer's title is "Куплю айфон этого года"`, () => expect(response.body.title).toBe(`Куплю айфон этого года`));
 });
 
-// describe(`API creates an offer if data is valid`, () => {
-//   const newOfferOne = {
-//     categories: [1, 2],
-//     title: `Тест тест`,
-//     description: `Тестирую тестовые данные 1`,
-//     picture: `test.jpg`,
-//     type: `OFFER`,
-//     sum: 1934
-//   };
-//
-//   let app;
-//   let response;
-//
-//   beforeAll(async () => {
-//     app = await createAPI();
-//     response = await request(app)
-//       .post(`/offers`)
-//       .send(newOfferOne);
-//   });
-//
-//   test(`Status code 201`, () => expect(response.statusCode).toBe(HttpCode.CREATED));
-//   test(`Offers count is changed`, () => request(app)
-//     .get(`/offers`)
-//     .expect((res) => expect(res.body.length).toBe(6))
-//   );
-// });
+describe(`API creates an offer if data is valid`, () => {
+  const newOfferOne = {
+    categories: [1, 2],
+    title: `Тест тест`,
+    description: `Тестирую тестовые данные 1`,
+    picture: `test.jpg`,
+    type: `OFFER`,
+    sum: 1934
+  };
+
+  let app;
+  let response;
+
+  beforeAll(async () => {
+    app = await createAPI();
+    response = await request(app)
+      .post(`/offers`)
+      .send(newOfferOne);
+  });
+
+  test(`Status code 201`, () => expect(response.statusCode).toBe(HttpCode.CREATED));
+  test(`Offers count is changed`, () => request(app)
+    .get(`/offers`)
+    .expect((res) => expect(res.body.length).toBe(6))
+  );
+});
 
 describe(`API refuses to create an offer if data is invalid`, () => {
   const newOffer = {
@@ -216,28 +216,28 @@ describe(`API returns a list of comments to given offer`, () => {
   test(`First comment text is "Почему в таком ужасном состоянии?"`, () => expect(response.body[0].text).toBe(`Почему в таком ужасном состоянии?`));
 });
 
-// describe(`API creates a comment if data is valid`, () => {
-//   const newComment = {
-//     text: `Валидному комментарию достаточно этого поля`
-//   };
-//
-//   let app;
-//   let response;
-//
-//   beforeAll(async () => {
-//     app = await createAPI();
-//     response = await request(app)
-//       .post(`/offers/1/comments`)
-//       .send(newComment);
-//   });
-//
-//   test(`Status code 201`, () => expect(response.statusCode).toBe(HttpCode.CREATED));
-//
-//   test(`Comments count is changed`, () => request(app)
-//     .get(`/offers/1/comments`)
-//     .expect((res) => expect(res.body.length).toBe(4))
-//   );
-// });
+describe(`API creates a comment if data is valid`, () => {
+  const newComment = {
+    text: `Валидному комментарию достаточно этого поля`
+  };
+
+  let app;
+  let response;
+
+  beforeAll(async () => {
+    app = await createAPI();
+    response = await request(app)
+      .post(`/offers/1/comments`)
+      .send(newComment);
+  });
+
+  test(`Status code 201`, () => expect(response.statusCode).toBe(HttpCode.CREATED));
+
+  test(`Comments count is changed`, () => request(app)
+    .get(`/offers/1/comments`)
+    .expect((res) => expect(res.body.length).toBe(3))
+  );
+});
 
 test(`API refuses to create a comment when data is invalid, and returns status code 400`, async () => {
   const app = await createAPI();
@@ -279,7 +279,7 @@ describe(`API correctly deletes a comment`, () => {
 
   test(`Status code 200`, () => expect(response.statusCode).toBe(HttpCode.OK));
 
-  test(`Comments count is 3 now`, () => request(app)
+  test(`Comments count is 1 now`, () => request(app)
     .get(`/offers/1/comments`)
     .expect((res) => expect(res.body.length).toBe(1))
   );

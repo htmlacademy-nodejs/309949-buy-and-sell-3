@@ -51,17 +51,6 @@ offersRouter.post(`/add`, upload.single(`avatar`), async (req, res) => {
   }
 });
 
-// offersRouter.get(`/category/:id`, (req, res) => {
-//   const pathId = Number(req.params.id);
-//   const category = categories.find((cat) => cat.id === pathId);
-//   res.render(`category`, {
-//     ...globalData,
-//     categories,
-//     category,
-//     pathId
-//   });
-// });
-
 offersRouter.get(`/add`, async (req, res) => {
   const categories = await api.getCategories();
   res.render(`new-ticket`, {

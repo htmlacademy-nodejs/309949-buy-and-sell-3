@@ -15,9 +15,15 @@ module.exports = (app, offerService, commentService) => {
   // Offers
 
   route.get(`/`, async (req, res) => {
-    const {comments} = req.query;
-    const offers = await offerService.findAll(comments);
-    res.status(HttpCode.OK).json(offers);
+    const {offset, limit, comments} = req.query;
+    let result;
+    if (limit || offset) {
+      result = await offerService.findPage({limit, offset});
+    } else {
+      result = await offerService.findAll(comments);
+    }
+
+    res.status(HttpCode.OK).json(result);
   });
 
   route.get(`/:offerId`, offerExists(offerService), async (req, res) => {
@@ -52,9 +58,9 @@ module.exports = (app, offerService, commentService) => {
 
   // Comments
 
-  route.post(`/:offerId/comments`, [offerExists(offerService), keysValidator(commentKeys)], (req, res) => {
-    const {offer} = res.locals;
-    const comment = commentService.create(offer, req.body);
+  route.post(`/:offerId/comments`, [offerExists(offerService), keysValidator(commentKeys)], async (req, res) => {
+    const {offerId} = req.params;
+    const comment = await commentService.create(offerId, req.body);
 
     return res.status(HttpCode.CREATED)
       .json(comment);
